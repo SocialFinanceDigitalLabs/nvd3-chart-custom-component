@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Example Web Component</title>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.22/CustomElements.min.js"></script> -->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.4/nv.d3.min.css" type="text/css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.4/nv.d3.min.js"></script>
+  <script src="detect-element-resize.js"></script>
+  <script src="sf-chart.js"></script>
+
+  <style>
+    h1, h2 { margin: 0; padding: 0; }
+
+    body {
+      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+      font-size: 16px;
+      background-color: #FAFAFA;
+    }
+
+    header {
+      text-align: center;
+    }
+
+    article {
+      float: left;
+      width: calc(33% - 20px);
+      margin: 0;
+      padding: 5px;
+      margin-left: 10px;
+      margin-top: 10px;
+      background-color: #efefef;
+      border: 1px solid #c1c1c1;
+      text-align: center;
+      box-shadow: 5px 5px 14px -3px lightgray;
+    }
+
+    article h2 {
+      margin-top: 5px;
+    }
+
+    .chart-container {
+      background-color: white;
+      border: 1px solid #D8D8D8;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chart Component Examples</h1>
+  </header>
+
+  <article>
+    <h2>Simple bar chart</h2>
+    <p>This is an example of a simple bar chart with one series.</p>
+
+    <div id="container" class="chart-container" style="width: 100%; height: 300px;">
+      <sf-chart id="example1" type="bar" width="100%" height="100%"></sf-chart>
+    </div>
+  </article>
+
+  <article>
+    <h2>Multi series bar chart</h2>
+    <p>This is an example of a bar chart with two series.</p>
+
+    <div id="container" class="chart-container" style="width: 100%; height: 300px;">
+      <sf-chart id="example2" type="bar" width="100%" height="100%"></sf-chart>
+    </div>
+
+  </article>
+
+  <article>
+    <h2>Stacked bar chart</h2>
+    <p>This is an example of a stacked bar chart with two series.</p>
+
+    <div id="container" class="chart-container" style="width: 100%; height: 300px;">
+      <sf-chart id="example3" type="stacked" width="100%" height="100%"></sf-chart>
+    </div>
+  </article>
+
+  <article>
+    <h2>Simple line chart</h2>
+    <p>This is an example of a simple line chart with one series.</p>
+
+    <div id="container" class="chart-container" style="width: 100%; height: 300px;">
+      <sf-chart id="example4" type="line" width="100%" height="100%"></sf-chart>
+    </div>
+  </article>
+
+  <article>
+    <h2>Multi line chart</h2>
+    <p>This is an example of a multi line chart with two series.</p>
+
+    <div id="container" class="chart-container" style="width: 100%; height: 300px;">
+      <sf-chart id="example5" type="line" width="100%" height="100%"></sf-chart>
+    </div>
+  </article>
+
+  <script>
+    const example1 = document.getElementById('example1')
+    example1.data = [{
+      key: 'First Series',
+      values: [{ 
+        label: 'A Label' ,
+        value: 1
+      }, { 
+        label: 'B Label' , 
+        value: 2
+      }, { 
+        label: 'C Label' , 
+        value: 3
+      }, { 
+        label: 'D Label' , 
+        value: 4
+      }, { 
+        label: 'E Label' ,
+        value: 5
+      }, { 
+        label: 'F Label' , 
+        value: 6
+      }, { 
+        label: 'G Label' , 
+        value: 7
+      }, { 
+        label: 'H Label' , 
+        value: 8
+      }]
+    }]
+
+    const example2 = document.getElementById('example2')
+    example2.data = [{
+      key: 'First Series',
+      values: [{ 
+        label: 'A Label' ,
+        value: 1
+      }, { 
+        label: 'B Label' , 
+        value: 2
+      }, { 
+        label: 'C Label' , 
+        value: 3
+      }, { 
+        label: 'D Label' , 
+        value: 4
+      }, { 
+        label: 'E Label' ,
+        value: 5
+      }, { 
+        label: 'F Label' , 
+        value: 6
+      }, { 
+        label: 'G Label' , 
+        value: 7
+      }, { 
+        label: 'H Label' , 
+        value: 8
+      }]
+    }, {
+      key: 'Second Series',
+      values: [{ 
+        label: 'A Label' ,
+        value: 1
+      }, { 
+        label: 'B Label' , 
+        value: 2
+      }, { 
+        label: 'C Label' , 
+        value: 3
+      }, { 
+        label: 'D Label' , 
+        value: 4
+      }, { 
+        label: 'E Label' ,
+        value: 5
+      }, { 
+        label: 'F Label' , 
+        value: 6
+      }, { 
+        label: 'G Label' , 
+        value: 7
+      }, { 
+        label: 'H Label' , 
+        value: 8
+      }]
+    }]
+
+    const example3 = document.getElementById('example3')
+    example3.data = [{
+      key: 'First Series',
+      values: [{ 
+        label: 'A Label' ,
+        value: 1
+      }, { 
+        label: 'B Label' , 
+        value: 2
+      }, { 
+        label: 'C Label' , 
+        value: 3
+      }, { 
+        label: 'D Label' , 
+        value: 4
+      }, { 
+        label: 'E Label' ,
+        value: 5
+      }, { 
+        label: 'F Label' , 
+        value: 6
+      }, { 
+        label: 'G Label' , 
+        value: 7
+      }, { 
+        label: 'H Label' , 
+        value: 8
+      }]
+    }, {
+      key: 'Second Series',
+      values: [{ 
+        label: 'A Label' ,
+        value: 1
+      }, { 
+        label: 'B Label' , 
+        value: 2
+      }, { 
+        label: 'C Label' , 
+        value: 3
+      }, { 
+        label: 'D Label' , 
+        value: 4
+      }, { 
+        label: 'E Label' ,
+        value: 5
+      }, { 
+        label: 'F Label' , 
+        value: 6
+      }, { 
+        label: 'G Label' , 
+        value: 7
+      }, { 
+        label: 'H Label' , 
+        value: 8
+      }]
+    }]
+
+    const example4 = document.getElementById('example4')
+    example4.data = [{
+      key: 'First Series',
+      values: [[0,1], [1,2], [2,3], [3,14], [4,5], [5,16], [6,7], [7,8], [8,19], [9,10], [10,11], [11,30], [12,13], [13,14]]
+    }]
+
+    const example5 = document.getElementById('example5')
+    example5.data = [{
+      key: 'First Series',
+      values: [[0,32], [1,31], [2,23], [3,14], [4,25], [5,36], [6,47], [7,48], [8,49], [9,50], [10,51], [11,60], [12,73], [13,84]]
+    }, {
+      key: 'Second Series',
+      values: [[0,31], [1,32], [2,43], [3,24], [4,45], [5,56], [6,57], [7,68], [8,69], [9,70], [10,81], [11,80], [12,83], [13,84]]
+    }]
+  </script>
+</body>
+</html>

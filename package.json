@@ -1,0 +1,11 @@
+{
+  "name": "nvd3-chart-custom-component",
+  "version": "1.0.0",
+  "description": "This is a web component library for creating NVD3 charts.",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}
