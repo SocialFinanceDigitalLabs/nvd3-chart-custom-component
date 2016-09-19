@@ -36,14 +36,14 @@ SfChart.render = function() {
     } else {
       chart = nv.models.multiBarChart()
       chart.showControls(false)
-      if (type === 'stacked') chart.stacked(true)
-      chart.x(d => d.label)
-      chart.y(d => d.value)
+      if (type === 'bar-stacked') chart.stacked(true)
+      chart.x(d => d[0])
+      chart.y(d => d[1])
     }
 
     let curChart = d3.select(el).append('svg')
 
-    curChart.datum(this.data)
+    curChart.datum(this.data.data)
     curChart.call(chart)
     curChart.attr('width', width)
     curChart.attr('height', height)
