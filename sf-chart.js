@@ -28,7 +28,7 @@ SfChart.render = function() {
   el.innerHTML = ''
   nv.addGraph(() => {
     let chart
-    if (type === 'line') {
+    if (type === 'line' || type === 'dots') {
       chart = nv.models.lineChart()
       chart.useInteractiveGuideline(true)
       chart.x(d => d[0])
