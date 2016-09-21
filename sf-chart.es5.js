@@ -3,13 +3,12 @@ var SfChart = Object.create(HTMLElement.prototype)
 SfChart.createdCallback = function() {
 
   Object.defineProperty(this, 'data', {
-    get: function() {this._data},
+    get: function() {return this._data},
     set: function(newData) {
       this._data = newData
       this.render()
     }
   })
-
   this.render()
 }
 
@@ -17,8 +16,13 @@ SfChart.attributeChangedCallback = function() {
   this.render()
 }
 
+SfChart.setData = function(data) {
+  this._data = data
+  this.render()
+}
+
 SfChart.render = function() {
-  if (!this.data) return;
+  if (!this._data) return;
 
   const width = this.getAttribute('width')
   const height = this.getAttribute('height')
@@ -43,14 +47,14 @@ SfChart.render = function() {
 
     var curChart = d3.select(el).append('svg')
 
-    curChart.datum(this.data.data)
+    curChart.datum(el._data.data)
     curChart.call(chart)
     curChart.attr('width', width)
     curChart.attr('height', height)
 
     nv.utils.windowResize(chart.update)
 
-    addResizeListener(this.parentNode, chart.update)
+    addResizeListener(el.parentNode, chart.update)
 
     chart.update()
 
