@@ -3,8 +3,8 @@ var SfChart = Object.create(HTMLElement.prototype)
 SfChart.createdCallback = function() {
 
   Object.defineProperty(this, 'data', {
-    get: () => this._data,
-    set: (newData) => {
+    get: function() {this._data},
+    set: function(newData) {
       this._data = newData
       this.render()
     }
@@ -26,22 +26,22 @@ SfChart.render = function() {
 
   const el = this
   el.innerHTML = ''
-  nv.addGraph(() => {
-    let chart
+  nv.addGraph(function() {
+    var chart
     if (type === 'line' || type === 'dots') {
       chart = nv.models.lineChart()
       chart.useInteractiveGuideline(true)
-      chart.x(d => d[0])
-      chart.y(d => d[1])
+      chart.x(function(d) { return d[0] })
+      chart.y(function(d) { return d[1] })
     } else {
       chart = nv.models.multiBarChart()
       chart.showControls(false)
       if (type === 'bar-stacked') chart.stacked(true)
-      chart.x(d => d[0])
-      chart.y(d => d[1])
+      chart.x(function(d) { return d[0] })
+      chart.y(function(d) { return d[1] })
     }
 
-    let curChart = d3.select(el).append('svg')
+    var curChart = d3.select(el).append('svg')
 
     curChart.datum(this.data.data)
     curChart.call(chart)
