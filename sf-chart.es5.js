@@ -27,6 +27,8 @@ SfChart.render = function() {
   const width = this.getAttribute('width')
   const height = this.getAttribute('height')
   const type = this.getAttribute('type')
+  const xAxisLabel = this.getAttribute('x-axis-label')
+  const yAxisLabel = this.getAttribute('y-axis-label')
 
   const el = this
   el.innerHTML = ''
@@ -45,14 +47,17 @@ SfChart.render = function() {
       chart.y(function(d) { return d[1] })
     }
 
+    chart.margin({left: 80, bottom: 50})
+    chart.xAxis.axisLabel(xAxisLabel)
+    chart.xAxis.tickFormat(function(d) { return el._data.buckets[d] })
+    chart.yAxis.axisLabel(yAxisLabel)
+
     var curChart = d3.select(el).append('svg')
 
     curChart.datum(el._data.data)
     curChart.call(chart)
     curChart.attr('width', width)
     curChart.attr('height', height)
-
-    nv.utils.windowResize(chart.update)
 
     addResizeListener(el.parentNode, chart.update)
 
