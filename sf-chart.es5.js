@@ -1,7 +1,6 @@
 var SfChart = Object.create(HTMLElement.prototype)
 
 SfChart.createdCallback = function() {
-
   Object.defineProperty(this, 'data', {
     get: function() {return this._data},
     set: function(newData) {
@@ -13,6 +12,13 @@ SfChart.createdCallback = function() {
 }
 
 SfChart.attributeChangedCallback = function() {
+  let data = undefined
+  try {
+    data = JSON.parse(this.getAttribute('data'))
+  } catch(e) {}
+  if (this._data != data) {
+    this._data = data
+  }
   this.render()
 }
 
@@ -22,7 +28,7 @@ SfChart.setData = function(data) {
 }
 
 SfChart.render = function() {
-  if (!this._data) return;
+  if (!this._data) return
 
   const width = this.getAttribute('width')
   const height = this.getAttribute('height')
